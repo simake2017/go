@@ -200,11 +200,33 @@ type funcval struct {
 	// variable-size, fn-specific data here
 }
 
+/*
+	go语言自己实现自身  ，比如go的c编译器将go源码文件
+	编译为  native 可执行文件，然后在编写一套go程序，编译成编译器
+	这个编译器的作用就是 将go源文件编译成跟c编译器一样的native程序
+	这就是go实现自身的过程，所以说go就需要对go源文件进行处理
+	比如空接口，非空接口等等，所以说 这里的 iface eface 就是
+	go本身编译器在处理go源码时候的处理方式
+
+	相当于go编译器在 通过什么样的方式去表示go源码文件， 然后实现
+	go的语义
+
+	用go实现一套编译器（用c语言编译） 然后去解释执行go源码文件
+	如果修改go语义，比如添加类的概念，需要增加相应的go代码去描述执行
+	类的概念，然后用c语言编译器重新生成新的go编译器
+
+ */
+/**
+	非空接口实现
+ */
 type iface struct {
 	tab  *itab
 	data unsafe.Pointer
 }
 
+/**
+	空接口 实现
+ */
 type eface struct {
 	_type *_type
 	data  unsafe.Pointer
